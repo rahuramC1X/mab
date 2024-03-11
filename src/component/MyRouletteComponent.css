@@ -1,0 +1,28 @@
+.roulette-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .wheel-container {
+    margin: 10px;
+  }
+  
+  .wheel {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .spin {
+    animation: spin 5s linear infinite;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(3600deg);
+    }
+  }
+  
+  .result {
+    margin-top: 10px;
+  }
+  
