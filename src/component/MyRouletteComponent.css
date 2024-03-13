@@ -1,15 +1,180 @@
-.roulette-container {
+
+  
+  .wheels-container {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
+    padding: 20px;
+   
+  }
+
+  .wheel-bg {
+    width: 400px; /* Set the width of the wheel container to match the width of the T-shirt image */
+    height: 600px; /* Set the height of the wheel container to match the height of the T-shirt image */
+    background-image: url('tshirt.png');
+    background-size: cover; /* Cover the entire container with the background image */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    background-position: center; /* Center the background image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
   }
   
   .wheel-container {
-    margin: 10px;
+    display: flex;
+    width: 250px;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+    
   }
   
+  
+  
+  
+
+  .roulette-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #D3D3D3;
+   
+
+  }
+  
+  .hammer {
+    width: 100px;
+    height: 100px;
+    background-image: url('scissors.gif'); /* Add your hammer image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent; /* Make the background transparent */
+    margin-top: 20px;
+    transition: transform 0.3s ease;
+    position: absolute;
+    
+  }
+  
+  .clicked {
+    transform: translate(40%, 150px) rotate(3600deg); /* Adjust rotation angle and position as needed */
+  }
+
+  
+
+  @keyframes hammerDown {
+    0% {
+      transform: translate(-50%, -10px) rotate(-30deg); /* Initial position of the hammer */
+    }
+    50% {
+      transform: translate(-50%, -10px) rotate(-30deg); /* Maintain the position until halfway through */
+    }
+    100% {
+      transform: translate(-50%, 10px) rotate(30deg); /* Move the hammer down */
+    }
+  }
+  .result {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .animate-result {
+    animation: slideIn 1s forwards;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .funky-font {
+    font-family: 'YourFunkyFont', cursive; /* Replace 'YourFunkyFont' with the name of your funky font */
+    /* Add additional font styling here */
+  }
+  
+
+  .roulette-heading {
+    margin-bottom: 20px;
+  }
+  
+  .wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: calc(33.33% - 20px); /* Adjust the width based on the number of wheels you want in a row */
+    margin: 10px;
+  }
+
+  
+  
+  
+  .wheel-wrapper {
+    position: relative;
+  }
+  
+  
+  
+  
+  
+  .result {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .result {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .animate-result {
+    animation: slideIn 1s forwards;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .funky-font {
+    font-family: 'Fantasy', cursive; /* Replace 'YourFunkyFont' with the name of your funky font */
+    color: #FFD700;
+    font-size: larger;
+  }
+  
+  
+  
+  
+ 
+  .spin-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  
+  
   .wheel {
-    width: 300px;
-    height: 300px;
+    width: 275px;
+    height: 275px;
   }
   
   .spin {
@@ -25,4 +190,5 @@
   .result {
     margin-top: 10px;
   }
+
   
