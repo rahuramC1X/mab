@@ -33,7 +33,7 @@ public class MessageController {
     @Autowired
     private UpperConfidenceBound upperConfidenceBound;
 
-
+    private String outPath= "histogram.png";
 
     @Autowired
     public MessageController(WebSocketHandler webSocketHandler) {
@@ -57,6 +57,8 @@ public class MessageController {
         }
         int result = this.greedyAgent.chooseGreedy(numberOfTrials);
         System.out.println("Wheel from spin greedy " + result);
+        webSocketHandler.getRewardStoreInstance().createHistogram(webSocketHandler.getRewardStoreInstance().getWheelFrequencyMap(), outPath);
+        webSocketHandler.sendImageToAll(outPath);
         webSocketHandler.getRewardStoreInstance().clear();
         webSocketHandler.sendMessageToAll("end");
         return result;
@@ -73,6 +75,8 @@ public class MessageController {
         }
         int result = this.epsilonGreedy.epsilonGreedy(numberOfTrials, epsilon);
         System.out.println("Wheel from spin epsilon " + result);
+        webSocketHandler.getRewardStoreInstance().createHistogram(webSocketHandler.getRewardStoreInstance().getWheelFrequencyMap(), outPath);
+        webSocketHandler.sendImageToAll(outPath);
         webSocketHandler.getRewardStoreInstance().clear();
         webSocketHandler.sendMessageToAll("end");
         return result;
@@ -88,6 +92,8 @@ public class MessageController {
         }
         int result = this.upperConfidenceBound.ucbAlgorithm(numberOfTrials, explorationFactor);
         System.out.println("Wheel from spin ucb " + result);
+        webSocketHandler.getRewardStoreInstance().createHistogram(webSocketHandler.getRewardStoreInstance().getWheelFrequencyMap(), outPath);
+        webSocketHandler.sendImageToAll(outPath);
         webSocketHandler.sendMessageToAll("end");
         webSocketHandler.getRewardStoreInstance().clear();
 

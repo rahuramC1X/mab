@@ -1,10 +1,22 @@
 package com.roulette.websocket.service;
 
+import org.jfree.chart.ChartUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
 
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @Service
@@ -67,4 +79,37 @@ public class RewardStore {
         rewardExp.clear(); // Assuming frequencyMap is another HashMap in your RewardStore class
         wheelFrequency.clear();
     }
+
+    public  void createHistogram(HashMap<Integer, Integer> dataMap, String outputPath) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        for (Map.Entry<Integer, Integer> entry : dataMap.entrySet()) {
+            int key = entry.getKey();
+            int value = entry.getValue();
+            if (key != 0) {  // Replace keyToSkip with the actual key you want to skip
+                // Convert the integer values to double explicitly
+                double doubleValue = value;
+                Comparable<?> comparableKey = (Comparable<?>) key;
+                dataset.addValue(doubleValue, "Frequency", comparableKey);
+            }
+        }
+
+        // Create the chart
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Histogram", // Chart title
+                "Wheels", // X-axis label
+                "Frequency", // Y-axis label
+                dataset
+        );
+
+        // Save the chart to a file
+        try {
+            // Save the chart as PNG file
+            ChartUtils.saveChartAsPNG(new File(outputPath), chart, 800, 600);
+            System.out.println("Chart saved to: " + outputPath);
+        } catch (IOException e) {
+            System.err.println("Error saving chart: " + e.getMessage());
+        }
+    }
+
 }

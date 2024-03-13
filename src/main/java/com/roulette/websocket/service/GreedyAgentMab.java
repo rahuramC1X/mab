@@ -27,15 +27,19 @@ public class GreedyAgentMab {
         int totalRewards = 0;
         for (int i = 1; i <= 10; i++) {
             webSocketHandler.sendMessageToAll(String.valueOf(i));
-            try {
-                TimeUnit.SECONDS.sleep(1); // Wait for 5 seconds to receive messages
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            totalRewards += webSocketHandler.getRewardStoreInstance().getReward(i);
+        }
+        try {
+            TimeUnit.SECONDS.sleep(1); // Wait for 5 seconds to receive messages
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (int i = 1; i <= 10; i++) {
             totalRewards += webSocketHandler.getRewardStoreInstance().getReward(i);
         }
         int result = findIndexWithLargestValue(webSocketHandler.getRewardStoreInstance().getRewardExpectationMap());
         totalRewards -= webSocketHandler.getRewardStoreInstance().getReward(result);
+
         for (int i = 11; i <= noOfTrials; i++) {
             webSocketHandler.sendMessageToAll(String.valueOf(result));
             try {

@@ -12,6 +12,9 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -87,6 +90,22 @@ public class WebSocketHandler {
         }
 
     }
+
+    public void sendImageToAll(String imagePath) {
+        try {
+            byte[] imageBytes = Files.readAllBytes(Paths.get(imagePath));
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+            // Construct JSON message with the image data
+            String jsonMessage = "Image" +"{\"image\":\"" + base64Image + "\"}";
+
+            sendMessageToAll(jsonMessage);
+        } catch (IOException e) {
+            System.err.println("Error reading image file: " + e.getMessage());
+        }
+    }
+
+
     public void flushRewardStore() {
         rewardStore.clear(); // Assuming clear() method is available in your RewardStore class to clear all data
 
